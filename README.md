@@ -2,7 +2,7 @@
 Master dissertation
 
 
-Branch "real": only real parameters in the deepnet
+Branch "real": only real parameters in the deepnet  
 Unstable version with problems:
 1. gradients exploding
 2. While computing the Moore-Penrose pseudo inverse of S matrix, SVD did not converge.  
