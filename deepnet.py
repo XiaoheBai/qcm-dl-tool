@@ -152,7 +152,7 @@ def tanh(Z):
 
 def real_lncosh_modified(Z):
     """
-    Implement the MODIFIED lncosh activation real np matrix, in order to avoid the "inf problem".
+    Implement the MODIFIED lncosh activation for real np matrix, in order to avoid the overflow from exp.
     Reference: Carleo netket
 
     Arguments:
@@ -256,30 +256,27 @@ def FFNN_paper_model(X, parameters):
     # Feedforward
     A, Z = linear_activation_forward(X, W1, b1, 'lncosh')
     Y = np.sum(A, keepdims=True)
-    phi = np.exp(Y)
-    phi = np.squeeze(phi)
+    Y = np.squeeze(Y)
+    """ We cannot compute phi = np.exp(Y), because it leads to overflow """
 
-    return phi, Y, Z
+    return Y, Z
 
 
 ### Test
 
-# L = 6
+if __name__ == '__main__':
+    L = 6
 
-# # input
-# X = np.array([-1, 1, 1, -1, -1, 1]).reshape((L,1))
+    # input
+    X = np.array([-1, 1, 1, -1, -1, 1]).reshape((L,1))
 
-# # Initialize parameters, then retrieve W1, b1, W2, b2. 
-# parameters = initialize_parameters(L, n_h = 2*L, seed=1234, sigma=0.01)
-# # print(parameters)
+    # Initialize parameters, then retrieve W1, b1, W2, b2. 
+    parameters = initialize_parameters(L, n_h = 2*L, seed=1234, sigma=0.01)
+    # print(parameters)
 
 
-# # Feedforward
-# A, Z = linear_activation_forward(X, parameters['W1'], parameters['b1'], 'logcosh')
-# print(Z)
-# print(A)
-# Y= np.sum(A, keepdims=True)
-# print(Y)
-# # print(phi)
+    # Feedforward
+    Y, _ = FFNN_paper_model(X, parameters)
+    print(Y)
 
 
