@@ -153,7 +153,7 @@ if __name__ == '__main__':
         S = compute_S(train_set, parameters)
             
         # Update parameters.
-        parameters = sr_update_parameters(parameters, S, f, 0.005)
+        parameters = sr_update_parameters(parameters, S, f, 0.003)
                                             
         # Retrieve W1, b1, W2, b2 from parameters
         W1 = parameters["W1"]

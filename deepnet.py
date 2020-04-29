@@ -25,7 +25,10 @@ def initialize_parameters(L, n_h, seed, sigma):
         for j in range(L):
             parameters['W1'].itemset((i,j), random.gauss(0,sigma) + random.gauss(0,sigma) * 1j)
 
+    
     parameters['b1'] = np.zeros((n_h, 1), dtype=complex)
+    for i in range(n_h):
+        parameters['b1'].itemset((i,0), random.gauss(0,sigma) + random.gauss(0,sigma) * 1j)
 
     
     assert(parameters['W1'].shape == (n_h, L))
