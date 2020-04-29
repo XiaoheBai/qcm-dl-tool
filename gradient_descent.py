@@ -162,14 +162,15 @@ def compute_f(train_set, train_set_h_local, parameters, hamiltonian):
             f_W1 -- Gradient of H with respect to W1
             f_b1 -- Gradient of H with respect to b1
     """
+    L = parameters['W1'].shape[1]
 
     n_sample = len(train_set)
 
-    quant_ave_OW1_EL = np.zeros((parameters['W1'].shape[0], L))
-    quant_ave_Ob1_EL = np.zeros((parameters['b1'].shape[0], 1))
+    quant_ave_OW1_EL = np.zeros(parameters['W1'].shape)
+    quant_ave_Ob1_EL = np.zeros(parameters['b1'].shape)
 
-    quant_ave_OW1 = np.zeros((parameters['W1'].shape[0], L))
-    quant_ave_Ob1 = np.zeros((parameters['b1'].shape[0], 1))
+    quant_ave_OW1 = np.zeros(parameters['W1'].shape)
+    quant_ave_Ob1 = np.zeros(parameters['b1'].shape)
     
 
     for i in range(n_sample):

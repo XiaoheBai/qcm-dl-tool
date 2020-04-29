@@ -97,7 +97,8 @@ def markov_chain(X, Y, parameters, n_sample = 1000):
         propose_Y = deepnet.FFNN_paper_model(propose_X.T, parameters)[0]
 
         """ Accept / Reject """
-        r = min(1, np.exp(2 * (propose_Y.real - Y.real)))
+        ratio = lambda propose_Y, Y: np.exp(2) if (propose_Y.real - Y.real)>=1. else np.exp(2 * (propose_Y.real - Y.real))
+        r = min(1 , ratio(propose_Y, Y))
         # print(propose_X, propose_Y, train_set_Y[n-1], r)
         random_number = random.uniform(0, 1)
 
